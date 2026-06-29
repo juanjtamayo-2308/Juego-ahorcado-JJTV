@@ -1,5 +1,5 @@
-""Codigo para extraer palabra del banco de palabras creado""
-""Juan Tamayo""
+#Codigo para generar palabra al azar del banco de palabras
+#Juan Tamayo
 
 import random
-from
+from data_access.bnco_palabras import 
