@@ -15,7 +15,7 @@ class MotorJuego:
     self.gestor_intentos = GestorIntentos()
     return self.obtener_estado_palabra()
 
-  def obtener_estado_palabra(self)
+  def obtener_estado_palabra(self):
       resultado = ""
       for letra in self.palabra_secreta:
         if letra in self.letras_adivinadas:
