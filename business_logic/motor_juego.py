@@ -37,25 +37,25 @@ class MotorJuego:
             "Palabra": self.obtener_estado_palabra()
         }
 
-  self.letras_adivinadas.append(letra)
+      self.letras_adivinadas.append(letra)
   
-  if letra in self.palabra_secreta:
-        gano = all(l in self.letras_adivinadas for l in self.palabra_secreta)
-        return {
-            "Status": "Acertaste",
-            "Mensaje": f"Felicidades. La letra '{letra}' es correcta.",
-            "Palabra": self.obtener_estado_palabra(),
-            "gano": gano
-        }
-    else:
-        self.gestor_intentos.restar_intento()
-        perdio = not self.gestor_intentos.tiene_intentos()
-        return {
-            "Status": "Fallaste",
-            "Mensaje": f"Incorrecto. La letra '{letra}' no pertenece a la palabra.",
-            "Palabra": self.obtener_estado_palabra(),
-            "perdio": perdio
-        }
+      if letra in self.palabra_secreta:
+          gano = all(l in self.letras_adivinadas for l in self.palabra_secreta)
+          return {
+              "Status": "Acertaste",
+              "Mensaje": f"Felicidades. La letra '{letra}' es correcta.",
+              "Palabra": self.obtener_estado_palabra(),
+              "gano": gano
+          }
+      else:
+          self.gestor_intentos.restar_intento()
+          perdio = not self.gestor_intentos.tiene_intentos()
+          return {
+              "Status": "Fallaste",
+              "Mensaje": f"Incorrecto. La letra '{letra}' no pertenece a la palabra.",
+              "Palabra": self.obtener_estado_palabra(),
+              "perdio": perdio
+          }
 
   
 
