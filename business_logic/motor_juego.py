@@ -56,8 +56,3 @@ class MotorJuego:
               "Palabra": self.obtener_estado_palabra(),
               "perdio": perdio
           }
-
-  
-
-  def procesar_letra(self, letra):
-    pass
