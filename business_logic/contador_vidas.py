@@ -10,6 +10,6 @@ class GestorIntentos:
         self.intentos_restantes -= 1
       return self.intentos_restantes
         
-  def vidas(self):
+  def tiene_intentos(self):
       return self.intentos_restantes > 0
         
