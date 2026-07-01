@@ -3,6 +3,72 @@
 
 from business_logic.motor_juego import MotorJuego
 
+AHORCADO_DIBUJOS = [
+    """
+       +---+
+       |   |
+           |
+           |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+       |   |
+       O   |
+           |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+       |   |
+       O   |
+       |   |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+       |   |
+       O   |
+      /|   |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+       |   |
+       O   |
+      /|\  |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+       |   |
+       O   |
+      /|\  |
+      /    |
+           |
+     =========
+    """,
+    """
+       +---+
+       |   |
+       O   |
+      /|\  |
+      / \  |
+           |
+     =========
+    """
+]
+
 def mostrar_pantalla_inicial():
   print("******************************************************")
   print("******************************************************")
@@ -17,48 +83,50 @@ def ejecutar_juego():
   mostrar_pantalla_inicial()
 
   guiones_iniciales = motor.iniciar_nueva_partida()
+  vidas_iniciales = motor.gestor_intentos.intentos_restantes
+  
   print(f"Palabra asignada: {guiones_iniciales}")
-  print(f"Vidas iniciales: {motor.gestor_intentos.intentos_restantes}")
+  print(f"Vidas iniciales: {vidas_iniciales}")
   print("\n[Estructura base cargada con exito]")
   
-  # --- AQUÍ INICIA EL CICLO DE JUEGO INTERACTIVO ---
   palabra_actual = guiones_iniciales
   
-  # Mientras el gestor de intentos diga que tenemos vidas, el juego sigue
   while motor.gestor_intentos.tiene_intentos():
       print(f"\n======================================================")
+      
+      # Calculamos qué dibujo mostrar según las vidas perdidas
+      intentos_fallados = vidas_iniciales - motor.gestor_intentos.intentos_restantes
+      # Evitamos un error si fallan más veces de los dibujos que tenemos
+      indice_dibujo = min(intentos_fallados, len(AHORCADO_DIBUJOS) - 1)
+      print(AHORCADO_DIBUJOS[indice_dibujo])
+      
       print(f"Palabra: {palabra_actual}")
       print(f"Vidas restantes: {motor.gestor_intentos.intentos_restantes}")
       
-      # Capturamos la letra introducida por el usuario
       letra = input("Introduce una letra (A-Z): ")
       
       try:
-          # Enviamos la letra a la lógica de negocio para procesarla
           resultado = motor.procesar_letra(letra)
           
           print(f"\n-> {resultado['Mensaje']}")
           palabra_actual = resultado['Palabra']
           
-          # Verificamos si ya ganó
           if resultado.get("gano"):
               print(f"\n******************************************************")
               print(f"¡FELICIDADES! Ganaste. La palabra era: {motor.palabra_secreta}")
               print(f"******************************************************")
               break
               
-          # Verificamos si se quedó sin vidas
           if resultado.get("perdio"):
               print(f"\n======================================================")
+              print(AHORCADO_DIBUJOS[-1]) # Mostramos el dibujo completo al perder
               print(f"¡GAME OVER! Te quedaste sin vidas.")
               print(f"La palabra secreta era: {motor.palabra_secreta}")
               print(f"======================================================")
               break
               
       except ValueError as e:
-          # Si el usuario mete un número o caracter inválido, atrapamos el error aquí
           print(f"\n[ALERTA] {e}")
 
 if __name__ == "__main__":
-  ejecutar_juego()
-  
+  ejecutar_juego() 
