@@ -17,8 +17,8 @@ def ejecutar_juego():
   mostrar_pantalla_inicial()
 
   guiones_iniciales = motor.iniciar_nueva_partida()
-  print(f"Palabra asignada por DAL: {guiones_iniciales}")
-  print(f"Vidas iniciales por BLL: {motor.gestor_intentos.intentos_restantes}")
+  print(f"Palabra asignada: {guiones_iniciales}")
+  print(f"Vidas iniciales: {motor.gestor_intentos.intentos_restantes}")
   print("\n[Estructura base cargada con exito]")
   
   # --- AQUÍ INICIA EL CICLO DE JUEGO INTERACTIVO ---
