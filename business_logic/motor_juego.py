@@ -48,7 +48,7 @@ class MotorJuego:
               "gano": gano
           }
       else:
-          self.gestor_intentos.restar_intento()
+          self.gestor_intentos.resta_intento()
           perdio = not self.gestor_intentos.tiene_intentos()
           return {
               "Status": "Fallaste",
